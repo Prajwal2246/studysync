@@ -1,0 +1,9 @@
+{
+  "name": "GeminiMeet",
+  "description": "A video conferencing style application with integrated Gemini AI for Search and Maps grounding.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
