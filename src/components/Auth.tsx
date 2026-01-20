@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { User } from '../types';
-import { Video, UserPlus, LogIn } from 'lucide-react';
+import React, { useState } from "react";
+import { User } from "../../types";
+import { Video, UserPlus, LogIn } from "lucide-react";
 
 interface AuthProps {
   onLogin: (user: User) => void;
@@ -8,28 +8,28 @@ interface AuthProps {
 
 export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
   const [isLogin, setIsLogin] = useState(true);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     if (!email || !password || (!isLogin && !name)) {
-      setError('Please fill in all fields.');
+      setError("Please fill in all fields.");
       return;
     }
 
     // Simulate Auth
     const user: User = {
       id: Date.now().toString(),
-      name: name || email.split('@')[0],
-      email: email
+      name: name || email.split("@")[0],
+      email: email,
     };
 
-    localStorage.setItem('gemini_meet_user', JSON.stringify(user));
+    localStorage.setItem("gemini_meet_user", JSON.stringify(user));
     onLogin(user);
   };
 
@@ -49,7 +49,9 @@ export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
             <button
               onClick={() => setIsLogin(true)}
               className={`flex-1 py-2 rounded-md text-sm font-medium transition-all ${
-                isLogin ? 'bg-gray-700 text-white shadow-sm' : 'text-gray-400 hover:text-gray-300'
+                isLogin
+                  ? "bg-gray-700 text-white shadow-sm"
+                  : "text-gray-400 hover:text-gray-300"
               }`}
             >
               Login
@@ -57,7 +59,9 @@ export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
             <button
               onClick={() => setIsLogin(false)}
               className={`flex-1 py-2 rounded-md text-sm font-medium transition-all ${
-                !isLogin ? 'bg-gray-700 text-white shadow-sm' : 'text-gray-400 hover:text-gray-300'
+                !isLogin
+                  ? "bg-gray-700 text-white shadow-sm"
+                  : "text-gray-400 hover:text-gray-300"
               }`}
             >
               Register
@@ -67,7 +71,9 @@ export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
           <form onSubmit={handleSubmit} className="space-y-4">
             {!isLogin && (
               <div>
-                <label className="block text-sm font-medium text-gray-400 mb-1">Full Name</label>
+                <label className="block text-sm font-medium text-gray-400 mb-1">
+                  Full Name
+                </label>
                 <input
                   type="text"
                   value={name}
@@ -77,9 +83,11 @@ export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
                 />
               </div>
             )}
-            
+
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-1">Email Address</label>
+              <label className="block text-sm font-medium text-gray-400 mb-1">
+                Email Address
+              </label>
               <input
                 type="email"
                 value={email}
@@ -90,7 +98,9 @@ export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-1">Password</label>
+              <label className="block text-sm font-medium text-gray-400 mb-1">
+                Password
+              </label>
               <input
                 type="password"
                 value={password}
@@ -106,8 +116,12 @@ export const Auth: React.FC<AuthProps> = ({ onLogin }) => {
               type="submit"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors flex items-center justify-center gap-2"
             >
-              {isLogin ? <LogIn className="w-4 h-4" /> : <UserPlus className="w-4 h-4" />}
-              {isLogin ? 'Sign In' : 'Create Account'}
+              {isLogin ? (
+                <LogIn className="w-4 h-4" />
+              ) : (
+                <UserPlus className="w-4 h-4" />
+              )}
+              {isLogin ? "Sign In" : "Create Account"}
             </button>
           </form>
         </div>
